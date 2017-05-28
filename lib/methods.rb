@@ -2,29 +2,35 @@
 
 # Write a method that returns its argument converted to a string.
 def my_to_s(arg)
+  arg.to_s
 end
 
 # Write a method that returns its argument rounded to the nearest integer.
 def my_round(num)
+  num.round
 end
 
 # Write a method that returns the remainder of its two arguments.
 # You may use the modulo operator.
 def my_modulo(dividend, divisor)
+  dividend % divisor
 end
 
 # Write a method that returns the least common multiple of its two arguments.
 # You may use the lcm method.
 def my_lcm(int_one, int_two)
+  int_one.lcm(int_two)
 end
 
 # Write a method that returns its argument converted to a float then
 # converted to a string.
 def to_stringified_float(int)
+  int.to_f.to_s
 end
 
 # Write a method that returns the sum of the absolute values of its arguments.
 def absolute_sum(num_one, num_two)
+  num_one.abs + num_two.abs
 end
 
 # Write a method that returns the negative value of its argument.
@@ -32,6 +38,7 @@ end
 # (negative(-1) => -1, negative(1) => -1, negative(0) => 0)
 # HINT: use the abs method
 def negative(num)
+  num.abs * (-1)
 end
 
 
@@ -41,6 +48,7 @@ end
 # Assume the argument is an integer.
 # HINT: What is the return value of 142 % 10? How about 2 % 10?
 def last_digit(int)
+  int.to_s[-1].to_i
 end
 
 # Write a method that returns a boolean indicating whether
@@ -48,6 +56,11 @@ end
 # Assume the argument is an integer.
 # Bonus points if you use last_digit as a helper method.
 def last_digit_odd?(int)
+  if last_digit(int).odd?
+    return true
+  else
+    return false
+  end
 end
 
 # Write a method that returns the greatest common divisor of the last
@@ -55,6 +68,9 @@ end
 # (gcd_of_last_digits(93, 9) = 3.gcd(9) => 3)
 # Bonus points if you use last_digit as a helper method.
 def gcd_of_last_digits(int_one, int_two)
+  last_digit1 = last_digit(int_one)
+  last_digit2 = last_digit(int_two)
+  last_digit1.gcd(last_digit2)
 end
 
 # Write a method that returns the last n digits of its first argument,
@@ -63,6 +79,8 @@ end
 # (last_n_digits(1234, 2) => 34)
 # HINT: What is the return value of 1234 % 100? How about 4 % 100?
 def last_n_digits(num, n)
+  num_string = num.to_s.reverse
+  return num_string[0...n].reverse.to_i
 end
 
 
@@ -73,12 +91,18 @@ end
 # (the "fractional part") of the quotient.
 # (dec_remainder_of_two_floats(8.0, 5.0) => 0.6 because 8.0 / 5.0 => 1.6)
 def dec_remainder_of_two_floats(f_dividend, f_divisor)
+  total = f_dividend/f_divisor
+  "0.#{total.to_s[-1]}".to_f
 end
 
 # Write a method that returns the decimal remainder of dividing two integers.
 # HINT: Use dec_remainder_of_two_floats as a helper method,
 # but don't forget to pass the proper type of argument
 def dec_remainder_of_two_integers(i_dividend, i_divisor)
+  f_dividend = i_dividend.to_f
+  f_divisor = i_divisor.to_f
+  total = f_dividend/f_divisor
+  "0.#{total.to_s.split(".")[1][0]}".to_f
 end
 
 
@@ -90,4 +114,6 @@ end
 # Assume the arguments are integers.
 # HINT: Use dec_remainder_of_two_integers as a helper method
 def int_remainder_without_modulo(i_dividend, i_divisor)
+  decimal_num = dec_remainder_of_two_integers(i_dividend, i_divisor)
+  return (decimal_num * i_divisor).round
 end
